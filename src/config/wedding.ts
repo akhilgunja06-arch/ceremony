@@ -116,7 +116,7 @@ export const wedding = {
   /** Original photographs used by the couple, family, and gallery sections. */
   photos: [
     { id: 'groom-1', label: 'Groom Portrait', src: '/photos/groom-portrait.png', group: 'story', orientation: 'square' },
-    { id: 'groom-4', label: 'Groom Family Photo', src: '/photos/groom-family.png', group: 'story', orientation: 'portrait' },
+    { id: 'groom-4', label: 'Groom Family Photo', src: '/photos/groom-family.jpg', group: 'story', orientation: 'portrait' },
     { id: 'bride-1', label: 'Bride Portrait', src: '/photos/bride-portrait.png', group: 'story', orientation: 'portrait' },
     { id: 'bride-4', label: 'Bride Family Photo', src: '/photos/bride-family-replacement.jpg', group: 'story', orientation: 'portrait' },
     { id: 'couple-1', label: 'Romantic Couple Portrait 1', src: '/photos/couple-romantic-1.png', group: 'couple', orientation: 'portrait' },
