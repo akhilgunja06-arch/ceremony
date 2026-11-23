@@ -2,7 +2,7 @@
  * ─────────────────────────────────────────────────────────────
  *  WEDDING CONFIGURATION — edit everything about the wedding here
  * ─────────────────────────────────────────────────────────────
- *  Every name, date, venue, message, photograph and music track used
+ *  Every name, date, venue, message and photograph used
  *  across the invitation is defined in this single file.
  */
 
@@ -12,7 +12,7 @@ export interface PhotoSlot {
   id: string;
   label: string;
   caption?: string;
-  /** Permanent image path (place the file in /public). Leave empty for a frame only. */
+  /** Permanent image path (place the file in /public). */
   src?: string;
   group: PhotoGroup;
   orientation?: 'portrait' | 'landscape' | 'square';
@@ -49,20 +49,20 @@ export const wedding = {
   },
 
   wedding: {
-    /** Countdown target — 13 December 2026, 08:22 AM IST */
-    dateISO: '2026-12-13T08:22:00+05:30',
+    /** Countdown target — 13 December 2026, 08:22 PM IST */
+    dateISO: '2026-12-13T20:22:00+05:30',
     timeZone: 'Asia/Kolkata',
     /** Displayed date and time (edit together with dateISO) */
     dateDisplay: '13-12-2026',
     dateLong: '13 December 2026',
-    timeDisplay: '08:22 AM',
+    timeDisplay: '08:22 PM',
     muhurthamLabel: 'Muhurtham',
     dayOverride: '', // leave empty to calculate the weekday automatically
   },
 
   venue: {
     name: 'Lingala',
-    lines: ['Lingala', 'Mandavalli Mandal', 'Eluru District', 'Andhra Pradesh, India'],
+    lines: ['Lingala,', 'Mandavalli Mandal,', 'Eluru District,', 'Andhra Pradesh, India'],
     address: 'Lingala, Mandavalli Mandal, Eluru District, Andhra Pradesh, India',
   },
 
@@ -107,67 +107,21 @@ export const wedding = {
     footerNote: 'Thank you for celebrating with us.',
   },
 
-  /** Optional background music. Drop an MP3 at /public/audio/wedding-theme.mp3. */
-  music: {
-    src: '/audio/wedding-theme.mp3',
-    title: 'Traditional Wedding Instrumental',
-    /** If no file is found, a soft, generated tanpura ambience is used instead. */
-    allowGeneratedFallback: true,
-  },
-
-  /** Optional devotional artwork. Drop a licensed image at this path to display it. */
+  /** Image used behind the welcome invitation. */
   artwork: {
-    venkateswaraImage: '/images/venkateswara.jpg',
+    welcomeBackgroundImage: '/images/welcome-background.jpg',
     mandapImage: '/images/mandap.jpg',
   },
 
-  /**
-   * Photograph slots. Put your originals in /public/photos using these exact
-   * file names, or upload them in the invitation itself via the photo manager.
-   */
+  /** Original photographs used by the couple, family, and gallery sections. */
   photos: [
-    {
-      id: 'hero',
-      label: 'Welcome Portrait',
-      caption: 'Welcome',
-      src: '/photos/couple-hero.jpg',
-      group: 'story',
-      orientation: 'portrait',
-    },
-    {
-      id: 'stage',
-      label: 'Couple — Decorated Stage',
-      caption: 'On our wedding stage',
-      src: '/photos/couple-stage.jpg',
-      group: 'story',
-      orientation: 'landscape',
-    },
-    {
-      id: 'romantic',
-      label: 'Couple — Romantic Portrait',
-      caption: 'Our story',
-      src: '/photos/couple-romantic.jpg',
-      group: 'story',
-      orientation: 'portrait',
-    },
-
-    { id: 'groom-1', label: 'Groom Portrait 1', src: '/photos/groom-portrait-1.jpg', group: 'groom', orientation: 'portrait' },
-    { id: 'groom-2', label: 'Groom Portrait 2', src: '/photos/groom-portrait-2.jpg', group: 'groom', orientation: 'portrait' },
-    { id: 'groom-3', label: 'Groom Traditional Dress Photo', src: '/photos/groom-traditional.jpg', group: 'groom', orientation: 'portrait' },
-    { id: 'groom-4', label: 'Groom Family Photo', src: '/photos/groom-family.jpg', group: 'groom', orientation: 'landscape' },
-    { id: 'groom-5', label: 'Groom Special Photo', src: '/photos/groom-special.jpg', group: 'groom', orientation: 'portrait' },
-
-    { id: 'bride-1', label: 'Bride Portrait 1', src: '/photos/bride-portrait-1.jpg', group: 'bride', orientation: 'portrait' },
-    { id: 'bride-2', label: 'Bride Portrait 2', src: '/photos/bride-portrait-2.jpg', group: 'bride', orientation: 'portrait' },
-    { id: 'bride-3', label: 'Bride Traditional Dress Photo', src: '/photos/bride-traditional.jpg', group: 'bride', orientation: 'portrait' },
-    { id: 'bride-4', label: 'Bride Family Photo', src: '/photos/bride-family.jpg', group: 'bride', orientation: 'landscape' },
-    { id: 'bride-5', label: 'Bride Special Photo', src: '/photos/bride-special.jpg', group: 'bride', orientation: 'portrait' },
-
-    { id: 'couple-1', label: 'Couple Photo 1', src: '/photos/couple-1.jpg', group: 'couple', orientation: 'portrait' },
-    { id: 'couple-2', label: 'Couple Photo 2', src: '/photos/couple-2.jpg', group: 'couple', orientation: 'portrait' },
-    { id: 'couple-3', label: 'Couple Photo 3', src: '/photos/couple-3.jpg', group: 'couple', orientation: 'portrait' },
-    { id: 'engagement', label: 'Engagement Photo', src: '/photos/engagement.jpg', group: 'couple', orientation: 'landscape' },
-    { id: 'pre-wedding', label: 'Pre-Wedding Photo', src: '/photos/pre-wedding.jpg', group: 'couple', orientation: 'landscape' },
+    { id: 'groom-1', label: 'Groom Portrait', src: '/photos/groom-portrait.png', group: 'story', orientation: 'square' },
+    { id: 'groom-4', label: 'Groom Family Photo', src: '/photos/groom-family.png', group: 'story', orientation: 'portrait' },
+    { id: 'bride-1', label: 'Bride Portrait', src: '/photos/bride-portrait.png', group: 'story', orientation: 'portrait' },
+    { id: 'bride-4', label: 'Bride Family Photo', src: '/photos/bride-family-replacement.jpg', group: 'story', orientation: 'portrait' },
+    { id: 'couple-1', label: 'Romantic Couple Portrait 1', src: '/photos/couple-romantic-1.png', group: 'couple', orientation: 'portrait' },
+    { id: 'couple-2', label: 'Romantic Couple Portrait 2', src: '/photos/couple-romantic-2.png', group: 'couple', orientation: 'square' },
+    { id: 'couple-3', label: 'Pellikoduku and Pellikuthuru Together', src: '/photos/couple-together.png', group: 'couple', orientation: 'landscape' },
   ] as PhotoSlot[],
 
   saptaPadhi: [

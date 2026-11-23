@@ -15,13 +15,11 @@ npm run typecheck  # tsc --noEmit
 
 ## Structure
 
-* `src/config/wedding.ts` — the single source of truth for names, dates, venue, messages, Sapta Padhi, photo slots, music and artwork. Never hardcode wedding copy in components.
+* `src/config/wedding.ts` — the single source of truth for names, dates, venue, messages, Sapta Padhi, photo slots and artwork. Never hardcode wedding copy in components.
 * `src/config/sections.ts` — navigation sections (English + Telugu labels).
 * `src/components/sections/*` — one file per page section, in page order: Blessing, Hero, CoupleIntro, Details, Venue, SaptaPadhi, Gallery, Family, Finale.
-* `src/components/ui/*` — reusable chrome: Navigation, Countdown, Lightbox, MusicPlayer, PhotoFrame, Section, ornaments and backdrops.
-* `src/components/admin/PhotoManager.tsx` — in-browser photo upload drawer (IndexedDB overrides).
-* `src/lib/photoLibrary.tsx` — IndexedDB photo overrides; `useWeddingMusic.ts` — audio with generated ambience fallback.
-* `public/photos`, `public/audio`, `public/images` — drop-in assets; file names documented in README.md.
+* `src/components/ui/*` — reusable chrome: Navigation, Countdown, Lightbox, PhotoFrame, Section, ornaments and backdrops.
+* `public/photos`, `public/images` — drop-in assets; file names documented in README.md.
 
 ## Conventions
 

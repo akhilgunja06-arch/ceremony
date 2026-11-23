@@ -41,7 +41,7 @@ export function Venue() {
                     <p className="text-[0.5rem] uppercase tracking-[0.3em] text-gold-300/70">The Venue</p>
                     <p className="font-display text-xl text-gold-100">{wedding.venue.name}</p>
                     <p className="text-[0.58rem] uppercase tracking-[0.18em] text-gold-200/60">
-                      Mandavalli Mandal · Eluru District
+                      Mandavalli Mandal, Eluru District
                     </p>
                   </div>
                 </div>

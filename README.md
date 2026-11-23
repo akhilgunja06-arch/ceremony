@@ -35,7 +35,6 @@ Open **`src/config/wedding.ts`**. Everything a guest reads comes from here:
 | Every English and Telugu message | `messages` |
 | The seven Sapta Padhi promises | `saptaPadhi` |
 | Photograph slots and file names | `photos` |
-| Background music | `music` |
 | Optional Venkateswara artwork | `artwork` |
 
 The weekday, Google Maps links and the countdown are all derived from the date and venue fields — you never need to edit them twice.
@@ -44,52 +43,25 @@ The weekday, Google Maps links and the countdown are all derived from the date a
 
 ## 2. Photographs
 
-There are two ways to add photographs.
+The seven original photographs are stored in `public/photos/` and mapped in `src/config/wedding.ts`.
 
-### A. Permanent photographs (recommended for the published invitation)
-
-Drop your originals into **`public/photos/`** using these exact file names. They appear automatically; nothing else needs editing.
-
-| Slot | File name | Used in |
+| Image | File | Section |
 | --- | --- | --- |
-| Welcome portrait | `couple-hero.jpg` | Welcome hero and featured album |
-| Decorated stage | `couple-stage.jpg` | Couple introduction |
-| Romantic portrait | `couple-romantic.jpg` | Story and featured album |
-| Groom portrait 1 | `groom-portrait-1.jpg` | Couple section and gallery |
-| Groom portrait 2 | `groom-portrait-2.jpg` | Gallery |
-| Groom traditional | `groom-traditional.jpg` | Gallery |
-| Groom family | `groom-family.jpg` | Gallery |
-| Groom special | `groom-special.jpg` | Gallery |
-| Bride portrait 1 | `bride-portrait-1.jpg` | Couple section and gallery |
-| Bride portrait 2 | `bride-portrait-2.jpg` | Gallery |
-| Bride traditional | `bride-traditional.jpg` | Gallery |
-| Bride family | `bride-family.jpg` | Gallery |
-| Bride special | `bride-special.jpg` | Gallery |
-| Couple photos 1–3 | `couple-1.jpg` … `couple-3.jpg` | Gallery |
-| Engagement | `engagement.jpg` | Gallery |
-| Pre-wedding | `pre-wedding.jpg` | Gallery |
+| Romantic couple portrait 1 | `couple-romantic-1.png` | Couple gallery |
+| Romantic couple portrait 2 | `couple-romantic-2.png` | Couple gallery |
+| Bride's family | `bride-family-replacement.jpg` | Bride's family card |
+| Groom portrait | `groom-portrait.png` | Couple section |
+| Bride portrait | `bride-portrait.png` | Couple section |
+| Couple together | `couple-together.png` | Couple gallery |
+| Groom's family | `groom-family.png` | Groom's family card |
 
-Any slot without a file shows an elegant gold frame with an "Add photo" button — it never shows an unrelated stock person.
-
-### B. In-browser preview
-
-The small photo button in the bottom-right corner opens the **Photo Studio**. Upload a photograph per slot, and it appears instantly on this device. Uploads are stored in the browser (IndexedDB), so they are private to that device and are not published.
-
-Each uploaded photo has a download button in the Photo Studio. Download it, then place it in `public/photos/` with the file name shown beside the slot so every guest can see it.
+Empty photo-upload placeholders have been removed; there is no in-browser upload interface.
 
 ---
 
-## 3. Music
+## 3. Optional devotional artwork
 
-Place a licensed instrumental at **`public/audio/wedding-theme.mp3`** and it will be used. Music never autoplays: guests press the play button.
-
-If the file is missing, a soft, generated tanpura-style ambience is played instead, so the control always works. Volume, play and pause are all available.
-
----
-
-## 4. Optional devotional artwork
-
-`public/images/venkateswara.jpg` is displayed in the opening blessing if present. Use only artwork you have the rights to publish. Without it, the section shows a hand-drawn gold Namam emblem, lotus, temple arch and oil lamps.
+`public/images/welcome-background.jpg` is the welcome invitation background. The previous Venkateswara Swamy photo has been removed from the Blessing section.
 
 ---
 
