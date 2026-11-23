@@ -1,23 +1,29 @@
 import { useCallback, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Images, Settings2 } from 'lucide-react';
-import { photoById, wedding, type PhotoGroup, type PhotoSlot } from '../../config/wedding';
-import { usePhotoLibrary } from '../../lib/photoLibrary';
+import { wedding, type PhotoGroup, type PhotoSlot } from '../../config/wedding';
 import { PhotoFrame } from '../ui/PhotoFrame';
 import { Lightbox, type LightboxPhoto } from '../ui/Lightbox';
 import { Reveal } from '../ui/Reveal';
 import { Section, SectionHeading } from '../ui/Section';
 import { GoldDivider, Lotus } from '../ui/Ornaments';
-import { Parallax } from '../ui/Parallax';
 
-const FILTERS: { id: 'all' | Exclude<PhotoGroup, 'story'>; label: string }[] = [
+type GalleryGroup = Exclude<PhotoGroup, 'story'>;
+type GalleryFilter = 'all' | GalleryGroup;
+
+const GROUP_ORDER: GalleryGroup[] = ['groom', 'bride', 'couple'];
+const AVAILABLE_GROUPS = GROUP_ORDER.filter((group) =>
+  wedding.photos.some((photo) => photo.group === group),
+);
+
+const FILTERS: { id: GalleryFilter; label: string }[] = [
   { id: 'all', label: 'All' },
-  { id: 'groom', label: 'Groom' },
-  { id: 'bride', label: 'Bride' },
-  { id: 'couple', label: 'Couple' },
+  ...AVAILABLE_GROUPS.map((group) => ({
+    id: group,
+    label: group[0].toUpperCase() + group.slice(1),
+  })),
 ];
 
-const GROUP_TITLES: Record<Exclude<PhotoGroup, 'story'>, { title: string; telugu: string }> = {
+const GROUP_TITLES: Record<GalleryGroup, { title: string; telugu: string }> = {
   groom: { title: 'The Groom', telugu: 'పెళ్లికొడుకు' },
   bride: { title: 'The Bride', telugu: 'పెళ్లికూతురు' },
   couple: { title: 'Together', telugu: 'వధూవరులు' },
@@ -38,9 +44,16 @@ function GroupGrid({
         <Reveal key={photo.id} delay={Math.min(index * 0.05, 0.3)} y={22}>
           <PhotoFrame
             photo={photo}
-            aspectClass={photo.orientation === 'landscape' ? 'aspect-[4/3]' : 'aspect-[3/4]'}
+            aspectClass={
+              photo.orientation === 'landscape'
+                ? 'aspect-[3/2]'
+                : photo.orientation === 'square'
+                  ? 'aspect-square'
+                  : 'aspect-[3/4]'
+            }
             onOpen={onOpen}
             onStatus={onStatus}
+            showOverlay={false}
             rounded="rounded-[1.15rem]"
           />
         </Reveal>
@@ -49,9 +62,8 @@ function GroupGrid({
   );
 }
 
-export function Gallery({ onOpenManager }: { onOpenManager: () => void }) {
-  const { overrides } = usePhotoLibrary();
-  const [filter, setFilter] = useState<'all' | Exclude<PhotoGroup, 'story'>>('all');
+export function Gallery() {
+  const [filter, setFilter] = useState<GalleryFilter>('all');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [loaded, setLoaded] = useState<Record<string, boolean>>({});
 
@@ -66,23 +78,25 @@ export function Gallery({ onOpenManager }: { onOpenManager: () => void }) {
 
   const lightboxPhotos = useMemo<LightboxPhoto[]>(() => {
     return wedding.photos
-      .map((photo) => ({ photo, src: overrides[photo.id] ?? photo.src }))
-      .filter((entry): entry is { photo: PhotoSlot; src: string } => Boolean(entry.src))
-      .filter(({ photo, src }) => loaded[photo.id] || Boolean(overrides[photo.id] && src))
-      .map(({ photo, src }) => ({ id: photo.id, label: photo.label, src, caption: photo.caption }));
-  }, [overrides, loaded]);
+      .filter(
+        (photo): photo is PhotoSlot & { src: string } =>
+          photo.group !== 'story' && Boolean(photo.src) && loaded[photo.id],
+      )
+      .map((photo) => ({
+        id: photo.id,
+        label: photo.label,
+        src: photo.src,
+        caption: photo.caption,
+      }));
+  }, [loaded]);
 
   const openPhoto = (id: string) => {
     const position = lightboxPhotos.findIndex((photo) => photo.id === id);
     if (position >= 0) setLightboxIndex(position);
   };
 
-  const storyPhotos = ['stage', 'hero', 'romantic']
-    .map((id) => photoById(id))
-    .filter((photo): photo is PhotoSlot => Boolean(photo));
-
-  const visibleGroups: Exclude<PhotoGroup, 'story'>[] =
-    filter === 'all' ? ['groom', 'bride', 'couple'] : [filter];
+  const visibleGroups: GalleryGroup[] =
+    filter === 'all' ? AVAILABLE_GROUPS : [filter];
 
   return (
     <Section id="gallery" labelledBy="gallery-heading">
@@ -92,29 +106,8 @@ export function Gallery({ onOpenManager }: { onOpenManager: () => void }) {
           eyebrow="Photo Album"
           title={wedding.messages.galleryHeading}
           telugu={wedding.messages.galleryTelugu}
-          description="A few frames from our journey. Tap a photograph to open it full screen, or tap an empty frame to add your own picture."
+          description="A few frames from our journey. Tap a photograph to open it full screen."
         />
-
-        <div className="mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5">
-          {storyPhotos.map((photo, index) => (
-            <Reveal key={photo.id} delay={index * 0.1} className={index === 1 ? 'sm:mt-10' : index === 2 ? 'sm:-mt-4' : ''}>
-              <div className="relative">
-                <Parallax distance={index === 1 ? 24 : 12}>
-                  <PhotoFrame
-                    photo={photo}
-                    aspectClass={index === 0 ? 'aspect-[4/5]' : 'aspect-[3/4]'}
-                    onOpen={openPhoto}
-                    onStatus={handleStatus}
-                    variant="hero"
-                    monogram="T & M"
-                    showLabel
-                    rounded="rounded-[1.6rem]"
-                  />
-                </Parallax>
-              </div>
-            </Reveal>
-          ))}
-        </div>
 
         <Reveal className="mt-14 flex flex-wrap items-center justify-center gap-2">
           {FILTERS.map((item) => {
@@ -163,20 +156,6 @@ export function Gallery({ onOpenManager }: { onOpenManager: () => void }) {
           })}
         </div>
 
-        <Reveal className="mt-14">
-          <div className="ornate-card flex flex-col items-center justify-between gap-4 rounded-2xl px-6 py-5 text-center sm:flex-row sm:text-left">
-            <div className="flex items-center gap-3">
-              <Images className="h-5 w-5 text-gold-300" aria-hidden="true" />
-              <p className="text-[0.68rem] uppercase tracking-[0.18em] text-gold-200/70">
-                Add or replace photographs any time — they stay on this device.
-              </p>
-            </div>
-            <button type="button" onClick={onOpenManager} className="btn-outline-gold shrink-0 px-4 py-2.5 text-[0.58rem]">
-              <Settings2 className="h-3.5 w-3.5" aria-hidden="true" />
-              Manage Photos
-            </button>
-          </div>
-        </Reveal>
       </div>
 
       <Lightbox

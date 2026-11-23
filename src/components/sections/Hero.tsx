@@ -1,20 +1,15 @@
 import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, CalendarDays, Clock, Heart, MapPin, Sparkles } from 'lucide-react';
-import { photoById, wedding } from '../../config/wedding';
-import { usePhotoLibrary } from '../../lib/photoLibrary';
-import { PhotoFrame } from '../ui/PhotoFrame';
+import { wedding } from '../../config/wedding';
 import { TempleArch } from '../ui/Ornaments';
 import { MandapBackdrop } from '../ui/Backdrops';
 import { burstPetals } from '../effects/PetalCanvas';
 
-const heroPhoto = photoById('hero');
-
 export function Hero() {
   const reduced = useReducedMotion();
-  const { overrides } = usePhotoLibrary();
   const [bgFailed, setBgFailed] = useState(false);
-  const bgSrc = overrides.hero ?? heroPhoto?.src;
+  const bgSrc = wedding.artwork.welcomeBackgroundImage;
   const showBg = Boolean(bgSrc) && !bgFailed;
 
   const enterInvitation = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -43,7 +38,7 @@ export function Hero() {
           <img
             src={bgSrc}
             alt=""
-            className="anim-kenburns h-full w-full object-cover object-[center_28%] opacity-70"
+            className="anim-kenburns h-full w-full object-cover object-[center_40%] opacity-70"
             onError={() => setBgFailed(true)}
             aria-hidden="true"
           />
@@ -58,6 +53,12 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <motion.img
+            {...fade(0.05)}
+            src={bgSrc}
+            alt="Venkateswara Swamy Namam"
+            className="mb-4 h-16 w-16 rounded-full border border-gold-300/50 object-cover object-center shadow-[0_0_18px_rgba(201,162,39,0.2)]"
+          />
           <motion.p {...fade(0.15)} className="eyebrow flex flex-wrap items-center justify-center gap-3 lg:justify-start">
             <span>13 · 12 · 2026</span>
             <span className="h-1 w-1 rounded-full bg-gold-400" aria-hidden="true" />
@@ -145,17 +146,6 @@ export function Hero() {
             aria-hidden="true"
           />
           <div className="absolute inset-0 -z-10 rounded-full bg-gold-500/10 blur-3xl" aria-hidden="true" />
-          {heroPhoto && (
-            <PhotoFrame
-              photo={heroPhoto}
-              aspectClass="aspect-[3/4]"
-              variant="hero"
-              priority
-              monogram={wedding.couple.monogram}
-              rounded="rounded-[999px_999px_1.6rem_1.6rem]"
-              className="drop-shadow-[0_40px_80px_rgba(0,0,0,0.65)]"
-            />
-          )}
           <p className="font-script mt-6 text-center text-2xl text-gold-200/80">Forever begins</p>
         </motion.div>
       </div>

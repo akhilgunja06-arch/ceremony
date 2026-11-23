@@ -1,14 +1,11 @@
-import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { wedding } from '../../config/wedding';
-import { GoldDivider, Gopuram, NamamEmblem, Diya, Lotus } from '../ui/Ornaments';
+import { GoldDivider, Gopuram, Diya, Lotus } from '../ui/Ornaments';
 import { MandapBackdrop } from '../ui/Backdrops';
 
 export function Blessing() {
   const reduced = useReducedMotion();
-  const [artworkFailed, setArtworkFailed] = useState(false);
-  const showArtwork = Boolean(wedding.artwork.venkateswaraImage) && !artworkFailed;
 
   return (
     <section
@@ -34,15 +31,6 @@ export function Blessing() {
           <Diya lit className="h-14 w-14" />
           <Diya lit className="h-12 w-12" />
         </div>
-        {showArtwork && (
-          <img
-            src={wedding.artwork.venkateswaraImage}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-screen"
-            onError={() => setArtworkFailed(true)}
-            aria-hidden="true"
-          />
-        )}
       </div>
 
       <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
@@ -55,16 +43,6 @@ export function Blessing() {
         >
           శ్రీ వెంకటేశ్వరాయ నమః
         </motion.p>
-
-        <motion.div
-          initial={reduced ? false : { opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
-          className="relative mt-6"
-        >
-          <div className="absolute inset-0 -z-10 rounded-full bg-gold-400/20 blur-3xl" />
-          <NamamEmblem className="h-32 w-32 anim-float sm:h-44 sm:w-44" />
-        </motion.div>
 
         <motion.h2
           id="blessings-heading"

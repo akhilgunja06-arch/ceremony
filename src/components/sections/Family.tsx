@@ -1,26 +1,29 @@
 import { Heart } from 'lucide-react';
-import { wedding } from '../../config/wedding';
+import { photoById, wedding } from '../../config/wedding';
 import { Reveal } from '../ui/Reveal';
 import { Section, SectionHeading } from '../ui/Section';
 import { GoldDivider, Lotus, TempleArch } from '../ui/Ornaments';
+import { PhotoFrame } from '../ui/PhotoFrame';
 
 export function Family() {
   const { families } = wedding;
 
   const familyCards = [
     {
-      key: 'groom',
-      label: families.groomLabel,
-      telugu: 'పెళ్లికొడుకు కుటుంబం',
-      names: families.groomParents,
-      fallback: `The family of ${wedding.couple.groom.name}`,
-    },
-    {
       key: 'bride',
+      photo: photoById('bride-4'),
       label: families.brideLabel,
       telugu: 'పెళ్లికూతురు కుటుంబం',
       names: families.brideParents,
-      fallback: `The family of ${wedding.couple.bride.name}`,
+      fallback: 'The family of GHANTA',
+    },
+    {
+      key: 'groom',
+      photo: photoById('groom-4'),
+      label: families.groomLabel,
+      telugu: 'పెళ్లికొడుకు కుటుంబం',
+      names: families.groomParents,
+      fallback: 'The family of PERIKALA',
     },
   ];
 
@@ -44,6 +47,15 @@ export function Family() {
             <Reveal key={card.key} delay={index * 0.1}>
               <div className="ornate-card ornate-card--hover relative h-full overflow-hidden rounded-[1.6rem] px-6 py-9 text-center">
                 <Lotus className="mx-auto h-8 w-16 opacity-80" />
+                {card.photo && (
+                  <PhotoFrame
+                    photo={card.photo}
+                    aspectClass="aspect-[3/4]"
+                    rounded="rounded-xl"
+                    showOverlay={false}
+                    className="mx-auto mt-5 w-full max-w-xs"
+                  />
+                )}
                 <p className="eyebrow mt-4 text-[0.55rem]">{card.label}</p>
                 <p className="font-display mt-3 text-2xl leading-snug text-gold-100 sm:text-3xl">
                   {card.names || card.fallback}

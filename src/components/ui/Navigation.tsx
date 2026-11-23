@@ -68,16 +68,21 @@ export function TopBar() {
             </span>
           </a>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-gold-200/30 bg-maroon-900/40 px-4 py-2 text-[0.58rem] uppercase tracking-[0.24em] text-gold-200 transition-colors duration-300 hover:border-gold-200/70 hover:bg-gold-200/10"
-            aria-expanded={menuOpen}
-            aria-controls="wedding-menu"
-          >
-            <Menu className="h-3.5 w-3.5" aria-hidden="true" />
-            Menu
-          </button>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="whitespace-nowrap rounded-full border border-rose-300/40 bg-rose-950/60 px-2 py-1 text-[0.45rem] font-semibold normal-case tracking-[0.16em] text-rose-200 sm:px-3 sm:text-[0.52rem]">
+              Designed by A.R❤️
+            </span>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-gold-200/30 bg-maroon-900/40 px-4 py-2 text-[0.58rem] uppercase tracking-[0.24em] text-gold-200 transition-colors duration-300 hover:border-gold-200/70 hover:bg-gold-200/10"
+              aria-expanded={menuOpen}
+              aria-controls="wedding-menu"
+            >
+              <Menu className="h-3.5 w-3.5" aria-hidden="true" />
+              Menu
+            </button>
+          </div>
         </div>
       </header>
 

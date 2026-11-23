@@ -486,34 +486,6 @@
   display: none;
 }
 
-/* Range input (volume) */
-input[type="range"].gold-range {
-  -webkit-appearance: none;
-  appearance: none;
-  height: 3px;
-  border-radius: 99px;
-  background: linear-gradient(90deg, #dfbd72, #a9821c);
-  outline-offset: 6px;
-}
-input[type="range"].gold-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #fff8e2;
-  border: 2px solid #c9a227;
-  box-shadow: 0 0 10px rgba(201, 162, 39, 0.8);
-  cursor: pointer;
-}
-input[type="range"].gold-range::-moz-range-thumb {
-  height: 14px;
-  width: 14px;
-  border-radius: 50%;
-  background: #fff8e2;
-  border: 2px solid #c9a227;
-  box-shadow: 0 0 10px rgba(201, 162, 39, 0.8);
-  cursor: pointer;
-}
 
 @media (prefers-reduced-motion: reduce) {
   html {

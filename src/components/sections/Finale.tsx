@@ -99,7 +99,7 @@ export function Finale() {
             {wedding.couple.bride.name} &amp; {wedding.couple.groom.name} · {wedding.wedding.dateLong}
           </p>
           <p className="text-[0.55rem] uppercase tracking-[0.2em] text-gold-200/30">
-            {wedding.venue.name} · Mandavalli Mandal · Eluru District · Andhra Pradesh
+            {wedding.venue.name}, Mandavalli Mandal, Eluru District, Andhra Pradesh
           </p>
           <a
             href="#blessings"
