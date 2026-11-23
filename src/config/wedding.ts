@@ -68,7 +68,7 @@ export const wedding = {
 
   families: {
     /** Leave empty to show a neutral family label instead of invented names. */
-    groomParents: '',
+    groomParents: 'The family of PERIKALA',
     brideParents: '',
     groomLabel: "Groom's Family",
     brideLabel: "Bride's Family",
