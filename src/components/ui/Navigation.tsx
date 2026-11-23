@@ -53,9 +53,12 @@ export function TopBar() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3 sm:px-8">
           <a href="#blessings" className="group flex items-center gap-3" aria-label="Back to the blessings">
             <span className="relative grid h-10 w-10 place-items-center rounded-full border border-gold-300/40 bg-maroon-900/50">
-              <span className="font-display text-[0.6rem] tracking-[0.06em] text-gold-200">
-                {wedding.couple.monogram}
-              </span>
+              <img
+                src="/images/wedding-logo.jpeg"
+                alt=""
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full rounded-full object-cover object-center"
+              />
               <span className="absolute inset-0 rounded-full border border-gold-300/10 transition-transform duration-500 group-hover:scale-110" />
             </span>
             <span className="hidden flex-col leading-tight sm:flex">
