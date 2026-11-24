@@ -65,6 +65,10 @@ export const wedding = {
     lines: ['Lingala,', 'Mandavalli Mandal,', 'Eluru District,', 'Andhra Pradesh, India'],
     address: 'Lingala, Mandavalli Mandal, Eluru District, Andhra Pradesh, India',
   },
+  contact: {
+    name: 'Mohan Sai Ghanta',
+    phone: '8688242320',
+  },
 
   families: {
     /** Leave empty to show a neutral family label instead of invented names. */
