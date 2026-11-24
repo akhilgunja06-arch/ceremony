@@ -1,4 +1,4 @@
-import { CalendarPlus, Heart, MapPin, Navigation, Sparkles } from 'lucide-react';
+import { CalendarPlus, Heart, MapPin, Navigation, Phone, Sparkles } from 'lucide-react';
 import { mapsLinks, wedding, weddingDay } from '../../config/wedding';
 import { googleCalendarLink } from '../../lib/calendar';
 import { Reveal } from '../ui/Reveal';
@@ -87,6 +87,24 @@ export function Finale() {
               {wedding.messages.footerNote}
               <Sparkles className="h-3 w-3" aria-hidden="true" />
             </p>
+          </Reveal>
+
+          <Reveal delay={0.4} className="mt-8 w-full max-w-lg">
+            <div className="rounded-2xl border border-gold-300/40 bg-maroon-950/70 px-5 py-5 shadow-[0_16px_40px_rgba(0,0,0,0.24)] backdrop-blur-sm sm:px-8">
+              <p className="text-[0.68rem] uppercase tracking-[0.22em] text-gold-200/70 sm:text-xs">
+                For more instructions contact me
+              </p>
+              <a
+                href={`tel:${wedding.contact.phone}`}
+                className="mt-3 inline-flex items-center gap-2 rounded-full border border-gold-300/30 bg-gold-300/10 px-5 py-2 text-lg font-semibold tracking-[0.08em] text-gold-100 transition-colors hover:bg-gold-300/20"
+              >
+                <Phone className="h-4 w-4 text-gold-300" aria-hidden="true" />
+                <span>{wedding.contact.phone}</span>
+              </a>
+              <p className="mt-3 font-display text-lg tracking-[0.08em] text-gold-gradient sm:text-xl">
+                {wedding.contact.name}
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
